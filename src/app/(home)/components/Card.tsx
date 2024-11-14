@@ -34,7 +34,7 @@ const Card = ({ book }: { book: TBook }) => {
 
 					<div className="sm:flex sm:items-end sm:justify-end">
 						<Link
-							href="#"
+							href={`/book/${book._id}`}
 							className="rounded block bg-primary-400 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-primary-600"
 						>
 							Read More
