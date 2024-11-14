@@ -5,6 +5,7 @@ export type TBook = {
 	file: string;
 	author: Author;
 	genre: string;
+	description: string;
 };
 
 export type Author = {
