@@ -2,7 +2,7 @@ import Banner from "@/app/(home)/components/Banner";
 import BooksList from "./components/BooksList";
 
 export default async function Home() {
-	const url = `${process.env.BACKEND_BASE_URL}/api/books`;
+	const url = `${process.env.BACKEND_BASE_URL}/books`;
 	let books;
 
 	// console.log("🚀 ~ Home ~ url:", url);
