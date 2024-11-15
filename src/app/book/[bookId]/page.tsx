@@ -1,6 +1,7 @@
 import { TBook } from "@/types";
 import Link from "next/link";
 import React from "react";
+import DownloadBtn from "./components/DownloadBtn";
 
 const SingleBookPage = async ({
 	params,
@@ -29,7 +30,7 @@ const SingleBookPage = async ({
 
 	return (
 		<>
-			<div className="container mx-auto p-4 max-w-7xl mx-auto">
+			<div className="container p-4 max-w-7xl mx-auto">
 				<div className="flex flex-wrap -mx-4">
 					<div className="w-full md:w-1/2 xl:w-1/2 p-4 rounded dark:bg-slate-600 text-white ">
 						<div className=" rounded shadow-md p-4">
@@ -61,6 +62,7 @@ const SingleBookPage = async ({
 					<button className="bg-primary-400 text-gray-900 font-bold py-2 px-4 rounded hover:bg-primary-600 mt-2">
 						<Link href="/">Back</Link>
 					</button>
+					<DownloadBtn file={book.book.file} />
 				</div>
 			</div>
 		</>
