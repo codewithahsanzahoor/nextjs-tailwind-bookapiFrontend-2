@@ -1,4 +1,5 @@
 import { TBook } from "@/types";
+import Link from "next/link";
 import React from "react";
 
 const SingleBookPage = async ({
@@ -55,6 +56,11 @@ const SingleBookPage = async ({
 							/>
 						</div>
 					</div>
+				</div>
+				<div className="">
+					<button className="bg-primary-400 text-gray-900 font-bold py-2 px-4 rounded hover:bg-primary-600 mt-2">
+						<Link href="/">Back</Link>
+					</button>
 				</div>
 			</div>
 		</>

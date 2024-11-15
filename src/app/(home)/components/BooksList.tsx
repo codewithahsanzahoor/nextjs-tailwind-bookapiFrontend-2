@@ -7,7 +7,7 @@ type TBookMain = {
 // 	books: TBookMain;
 // };
 
-// props{product} props object ki andar product pass huwa ha as a prop => after destructuring => {product} => {product: product}
+// props{product} props object ki andar books pass huwa ha as a prop => after destructuring => {books} => y shape ha object ki {books: TBookMain}
 const BooksList = ({ books }: { books: TBookMain }) => {
 	// console.log("🚀 ~ BooksList ~ books:", books.allBooks);
 	return (
