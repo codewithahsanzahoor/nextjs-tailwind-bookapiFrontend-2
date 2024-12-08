@@ -3,7 +3,7 @@ import BooksList from "./components/BooksList";
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
 
-export default async function Home() {
+export default function Home() {
 	return (
 		<div className="max-w-7xl mx-auto ">
 			<Banner />

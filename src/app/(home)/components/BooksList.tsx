@@ -1,58 +1,47 @@
+"use client"; // Ensure this is at the top
+
 import { TBook } from "@/types";
 import Card from "./Card";
+import Loading from "@/components/Loading";
+import { useEffect, useState } from "react";
 
-const BooksList = async () => {
-	const url = `${process.env.BACKEND_BASE_URL}/books`;
-	let books: { allBooks: TBook[] } | null = null;
+const BooksList = () => {
+	const url = "http://localhost:3000/api/books"; // Ensure this is correct
+	const [books, setBooks] = useState<TBook[]>([]);
+	const [loading, setLoading] = useState(true);
 
-	// console.log("🚀 ~ Home ~ url:", url);
-	const options = {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	};
-	try {
-		const response = await fetch(url, options);
+	useEffect(() => {
+		const fetchBooks = async () => {
+			try {
+				const response = await fetch(url);
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+				const data = await response.json();
+				console.log("Fetched books:", data);
+				setBooks(data);
+			} catch (error) {
+				console.error("Error fetching books:", error);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-		// Check if the HTTP status indicates a failure
-		if (!response.ok) {
-			// Log the HTTP status and status text for more clarity
-			throw new Error(
-				`HTTP error! Status: ${response.status} - ${response.statusText}`
-			);
-		}
+		fetchBooks();
+	}, []); // Empty dependency array to run only once
 
-		// Try parsing the response to JSON
-		try {
-			books = await response.json();
-		} catch (parseError) {
-			// Handle JSON parsing errors
-			throw new Error(
-				"Failed to parse response as JSON. Details: " + parseError
-			);
-		}
+	if (loading) return <Loading />; // Show loading state
 
-		// console.log("Fetched books:", books);
-	} catch (error) {
-		// Handle network errors, HTTP errors, and JSON parsing errors
-		throw new Error(
-			"An error occurred while fetching books from the API:" + error
-		);
-	}
-
-	if (!books) {
-		throw new Error("Books not found");
+	if (books.length === 0) {
+		return <div>No books found.</div>; // Handle case where no books are returned
 	}
 
 	return (
-		<>
-			<div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 my-3">
-				{books.allBooks.map((book) => (
-					<Card key={book._id} book={book} />
-				))}
-			</div>
-		</>
+		<div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 my-3">
+			{books.map((book) => (
+				<Card key={book._id} book={book} />
+			))}
+		</div>
 	);
 };
 
