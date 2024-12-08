@@ -6,7 +6,10 @@ import Loading from "@/components/Loading";
 import { useEffect, useState } from "react";
 
 const BooksList = () => {
-	const url = "http://localhost:3000/api/books"; // Ensure this is correct
+	const url = `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/books`;
+	// console.log("🚀 ~ url:", url);
+	// const url = "http://localhost:3000/api/books"; // Ensure this is correct
+
 	const [books, setBooks] = useState<TBook[]>([]);
 	const [loading, setLoading] = useState(true);
 
